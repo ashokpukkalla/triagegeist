@@ -16,6 +16,7 @@ This project builds a multi-modal undertriage detection system for emergency dep
 - **Missingness-as-Clinical-Signal** (Novel): Information-theoretic analysis of which vitals are *not* recorded — formalizing the clinical observation that missing data in EDs is not random
 - **Sentence-BERT NLP**: 384-dimensional dense semantic embeddings of chief complaint text
 - **Undertriage Safety Net**: Binary high-sensitivity detector (≥95% recall) for ESI 1-2 patients
+- **Interactive Clinical Decision Support**: ipywidgets-based triage prediction interface with real-time ESI prediction, confidence scoring, and safety net alerts
 - **~490 Multi-Modal Features**: Vitals + clinical flags + computed scores + demographics + comorbidities + missingness + NLP
 - **SHAP Explainability**: Global and local feature importance by clinical category
 - **Bootstrap Confidence Intervals**: 95% CIs on all reported metrics
@@ -25,18 +26,12 @@ This project builds a multi-modal undertriage detection system for emergency dep
 
 ```
 triagegeist/
-├── README.md                  # This file
-├── WRITEUP.md                 # Competition writeup
-├── cover_image.png            # 560x280 cover image
-├── requirements.txt           # Python dependencies
-├── build_notebook.py          # Notebook builder script
-├── notebook.ipynb             # Generated competition notebook
-└── data/                      # Competition data (not included)
-    ├── train.csv
-    ├── test.csv
-    ├── chief_complaints.csv
-    ├── patient_history.csv
-    └── sample_submission.csv
+├── README.md                                        # This file
+├── WRITEUP.md                                       # Competition writeup
+├── triagegeist-multimodal-undertriage-v5.ipynb       # Full competition notebook (v13)
+├── cover_image.png                                  # 560x280 cover image
+├── requirements.txt                                 # Python dependencies
+└── .gitignore                                       # Git ignore rules
 ```
 
 ## Setup & Reproduction
