@@ -27,7 +27,7 @@ We integrate all three competition data sources on patient_id to create a compre
 - **chief_complaints.csv** (100,000 records): Free-text chief complaint narratives providing rich clinical context that structured fields cannot capture. A patient reporting "worst headache of my life" carries different clinical urgency than "headache for 3 days."
 - **patient_history.csv** (100,000 records): 25 binary comorbidity flags (heart failure, COPD, diabetes, immunosuppression, malignancy, etc.) plus medication counts and prior ED utilization.
 
-### Four Novel Components
+### Five Novel Components
 
 **1. Four-Model Calibrated Ensemble**
 
@@ -66,6 +66,15 @@ A TF-IDF fallback (300 features, sublinear TF, bigrams) is implemented for envir
 **4. Undertriage Safety Net**
 
 A binary classifier (ESI 1-2 versus ESI 3-5) with the decision threshold tuned for 95 percent or greater sensitivity. This operates as a clinical "second opinion": when the safety net fires, it signals the triage nurse that a patient may be more acutely ill than assigned. We deliberately accept lower specificity (more false alarms) to minimize missed critical patients, consistent with clinical risk management principles.
+
+**5. Interactive Clinical Decision Support Interface (Novel)**
+
+The notebook includes an interactive ipywidgets-based triage prediction interface that demonstrates how the system would function in a real clinical environment. Clinicians can adjust patient parameters (heart rate, blood pressure, SpO2, temperature, respiratory rate, GCS, age, demographics) via sliders and dropdown menus, and instantly see:
+- The predicted ESI level with confidence percentage
+- The full class probability distribution with color-coded bars
+- Safety net alerts when high-acuity probability exceeds 30%
+
+This interactive demonstration bridges the gap between offline model evaluation and real-time clinical decision support, showing how a trained ensemble could be deployed as a bedside second-opinion tool. The auto-prediction on default values provides immediate visual feedback on model behavior.
 
 ### Feature Engineering (~490 features)
 
@@ -197,6 +206,8 @@ High-confidence errors (model wrong with >80% confidence) are enumerated and pro
 ## Reproducibility
 
 - Full code in a single Kaggle Notebook that runs end-to-end without errors (27.7 minutes runtime)
+- GitHub repository: [github.com/ashokpukkalla/triagegeist](https://github.com/ashokpukkalla/triagegeist) — complete source code, documentation, and requirements
+- Interactive clinical decision support demo embedded in the notebook (ipywidgets-based)
 - Random seed 42 set for all stochastic operations (numpy, sklearn, LightGBM, XGBoost, MLP)
 - Competition data: train.csv, chief_complaints.csv, patient_history.csv, test.csv
 - External validation data: CDC NHAMCS 2022 (publicly available via Kaggle dataset radhikaaaaaaa/nhamcs2022)
